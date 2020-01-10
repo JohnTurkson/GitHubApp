@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GitHub App</string>
-    <string name="user_search_view_hint">Search for a User</string>
-    <string name="user_search_bar_title_hint">Search for a User</string>
+    <string name="blank" />
+    <string name="user_search_bar_hint">Username</string>
+    <string name="user_search_bar_title_hint">List User Repositories</string>
     <string name="user_search_button_text">Search</string>
+    <string name="repository_results_title_text">Repositories</string>
 </resources>

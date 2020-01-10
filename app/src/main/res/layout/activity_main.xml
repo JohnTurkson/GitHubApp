@@ -4,16 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="repository"
-            type="com.johnturkson.githubapp.api.GitHubRepository" />
-    </data>
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="repository"-->
+<!--            type="com.johnturkson.githubapp.api.GitHubRepository" />-->
+<!--    </data>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_activity_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="16sp"
         tools:context=".activities.MainActivity">
 
         <TextView
@@ -21,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/user_search_bar_title_hint"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,8 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="@string/user_search_bar_title_hint"
+            android:hint="@string/user_search_bar_hint"
+            android:importantForAutofill="no"
             android:inputType="textPersonName"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_search_bar_title" />
@@ -41,19 +45,44 @@
             android:id="@+id/search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scrollbarSize="4dp"
             android:text="@string/user_search_button_text"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@+id/user_search_bar"
             app:layout_constraintTop_toBottomOf="@+id/user_search_bar" />
 
         <TextView
-            android:id="@+id/repository_placeholder_text"
-            android:layout_width="match_parent"
+            android:id="@+id/repository_results_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:text="@string/blank"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_button"
+            tools:text="Results" />
+
+        <TextView
+            android:id="@+id/repository_results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/blank"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repository_results_title"
             tools:text="Example Repository Name" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/github_repositories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repository_results"
+            tools:listitem="@layout/github_repository_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
