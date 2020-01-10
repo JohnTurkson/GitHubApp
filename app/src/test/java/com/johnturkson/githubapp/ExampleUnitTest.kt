@@ -1,4 +1,4 @@
-package com.johnturkson.androidonboardingproject
+package com.johnturkson.githubapp
 
 import org.junit.Test
 

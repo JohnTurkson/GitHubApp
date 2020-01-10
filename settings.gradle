@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='Android Onboarding Project'
+rootProject.name='GitHub App'
