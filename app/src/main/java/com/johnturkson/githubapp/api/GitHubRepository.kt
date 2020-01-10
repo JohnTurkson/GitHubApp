@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class GitHubRepository(
     val id: Int,
     @SerialName("node_id") val nodeId: String,
-    val owner: User,
+    val owner: GitHubUser,
     val name: String,
     @SerialName("html_url") val url: String,
     val description: String?
@@ -16,7 +16,7 @@ data class GitHubRepository(
 
 // TODO serialize Strings as URLs
 @Serializable
-data class User(
+data class GitHubUser(
     val login: String,
     val id: Int,
     @SerialName("node_id") val nodeId: String,
