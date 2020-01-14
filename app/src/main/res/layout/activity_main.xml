@@ -16,15 +16,15 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/AppTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/settings_menu"
             app:navigationIcon="@drawable/ic_menu"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:subtitle="Placeholder Subtitle"
-            app:title="Placeholder Title" />
+            app:popupTheme="@style/AppTheme"
+            app:subtitle="Main Subtitle"
+            app:title="Main Title" />
 
         <TextView
             android:id="@+id/user_search_bar_title"

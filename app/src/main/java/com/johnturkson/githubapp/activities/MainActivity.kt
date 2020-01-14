@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.johnturkson.githubapp.R
-import com.johnturkson.githubapp.adapters.GitHubRepositoryAdapter
+import com.johnturkson.githubapp.adapters.GitHubRepositoryViewAdapter
+import com.johnturkson.githubapp.adapters.GitHubRepositoryViewHolder
 import com.johnturkson.githubapp.api.GitHubApi
 import com.johnturkson.githubapp.api.GitHubRepository
+import com.johnturkson.githubapp.api.GitHubUser
 import com.johnturkson.githubapp.databinding.ActivityMainBinding
 import kotlinx.serialization.UnstableDefault
 import retrofit2.Call
@@ -38,19 +40,42 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchButton: Button
     private lateinit var repositoryViewTitle: TextView
     private lateinit var repositoryView: TextView
+    private lateinit var repositories: RecyclerView
+    private lateinit var repositoriesViewManager: RecyclerView.LayoutManager
+    private lateinit var repositoriesViewAdapter: RecyclerView.Adapter<*>
     private lateinit var bottomNavigationView: BottomNavigationView
     
-    private lateinit var repositories: RecyclerView
-    private lateinit var repositoriesViewAdapter: GitHubRepositoryAdapter
-    private lateinit var repositoriesViewManager: RecyclerView.LayoutManager
+    val repos =listOf(
+        GitHubRepository(
+            1,
+            "john",
+            GitHubUser("john", 1, "nodeid", "avatar", "url"),
+            "example repo",
+            "this is an example repo",
+            "example description"
+        ),
+        GitHubRepository(
+            2,
+            "john",
+            GitHubUser("john2", 1, "nodeid", "avatar", "url"),
+            "example repo2",
+            "this is an example repo",
+            "example description"
+        ),
+        GitHubRepository(
+            3,
+            "john",
+            GitHubUser("john3", 1, "nodeid", "avatar", "url"),
+            "example repo3",
+            "this is an example repo",
+            "example description"
+        )
+    )
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
         initializeTimber()
-        
-        repositoriesViewManager = LinearLayoutManager(this)
-        repositoriesViewAdapter = GitHubRepositoryAdapter()
         
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         
@@ -62,14 +87,23 @@ class MainActivity : AppCompatActivity() {
         searchButton = binding.searchButton
         repositoryViewTitle = binding.repositoryResultsTitle
         repositoryView = binding.repositoryResults
+        
+        repositoriesViewManager = LinearLayoutManager(this)
+        repositoriesViewAdapter = GitHubRepositoryViewAdapter(
+            repos
+        )
         repositories = binding.githubRepositories.apply {
             layoutManager = repositoriesViewManager
             adapter = repositoriesViewAdapter
         }
-        bottomNavigationView = binding.navViewBottom
-        bottomNavigationView.setOnNavigationItemSelectedListener { onBottomNavigationViewItemSelected(it) }
         
-        binding.githubRepositories.adapter = GitHubRepositoryAdapter()
+        bottomNavigationView = binding.navViewBottom
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            onBottomNavigationViewItemSelected(
+                it
+            )
+        }
+        
         searchButton.setOnClickListener {
             searchForRepositories(searchBar.text.toString())
         }
@@ -115,7 +149,11 @@ class MainActivity : AppCompatActivity() {
             // R.id.navigation_users -> Toast.makeText(this, "users", Toast.LENGTH_SHORT).show()
             //     .also { Timber.d("user tab selected") }
             //     .let { true }
-            R.id.navigation_repositories -> Toast.makeText(this, "repositories", Toast.LENGTH_SHORT).show()
+            R.id.navigation_repositories -> Toast.makeText(
+                this,
+                "repositories",
+                Toast.LENGTH_SHORT
+            ).show()
                 .also { Timber.d("repositories tab selected") }
                 .let { true }
             else -> super.onOptionsItemSelected(item)
@@ -173,8 +211,8 @@ class MainActivity : AppCompatActivity() {
         repositoryViewTitle.text = getString(R.string.repository_results_title_text)
         repositoryView.text = repositories.random().name
         // TODO not working
-        repositoriesViewAdapter.repositories = repositories
-        repositoriesViewAdapter.notifyDataSetChanged()
+        // repositoriesViewAdapter.repositories = repositories
+        // repositoriesViewAdapter.notifyDataSetChanged()
         Timber.d("updated repository text view")
     }
 }
