@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/title_search" />
+    <item
+        android:id="@+id/navigation_users"
+        android:icon="@drawable/ic_user"
+        android:title="@string/title_users" />
+    <item
+        android:id="@+id/navigation_repositories"
+        android:icon="@drawable/ic_repositories"
+        android:title="@string/title_repositories" />
+</menu>

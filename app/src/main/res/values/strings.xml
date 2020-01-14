@@ -4,5 +4,9 @@
     <string name="user_search_bar_hint">Username</string>
     <string name="user_search_bar_title_hint">List User Repositories</string>
     <string name="user_search_button_text">Search</string>
-    <string name="repository_results_title_text">Repositories</string>
+    <string name="repository_results_title_text">Results</string>
+    <string name="title_users">Users</string>
+    <string name="title_search">Search</string>
+    <string name="title_repositories">Repositories</string>
+    <string name="settings">Settings</string>
 </resources>

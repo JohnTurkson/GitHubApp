@@ -4,32 +4,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="repository"-->
-<!--            type="com.johnturkson.githubapp.api.GitHubRepository" />-->
-<!--    </data>-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_activity_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16sp"
         tools:context=".activities.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/settings_menu"
+            app:navigationIcon="@drawable/ic_menu"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:subtitle="Placeholder Subtitle"
+            app:title="Placeholder Title" />
 
         <TextView
             android:id="@+id/user_search_bar_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/user_search_bar_title_hint"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_margin"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_margin"
+            app:layout_constraintTop_toBottomOf="@+id/main_toolbar" />
 
         <EditText
             android:id="@+id/user_search_bar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -37,8 +47,8 @@
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/user_search_bar_title"
+            app:layout_constraintStart_toStartOf="@+id/user_search_bar_title"
             app:layout_constraintTop_toBottomOf="@+id/user_search_bar_title" />
 
         <Button
@@ -55,34 +65,61 @@
             android:id="@+id/repository_results_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/default_layout_margin"
             android:text="@string/blank"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_right_margin"
+            app:layout_constraintStart_toStartOf="@+id/guideline_left_margin"
             app:layout_constraintTop_toBottomOf="@+id/search_button"
             tools:text="Results" />
 
         <TextView
             android:id="@+id/repository_results"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:text="@string/blank"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/repository_results_title"
+            app:layout_constraintStart_toStartOf="@+id/repository_results_title"
             app:layout_constraintTop_toBottomOf="@+id/repository_results_title"
             tools:text="Example Repository Name" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/github_repositories"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@+id/repository_results"
+            app:layout_constraintStart_toStartOf="@+id/repository_results"
+            app:layout_constraintTop_toBottomOf="@+id/repository_results">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view_bottom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repository_results"
-            tools:listitem="@layout/github_repository_item" />
+            app:menu="@menu/bottom_navigation_menu" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_left_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_right_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
