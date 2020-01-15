@@ -23,8 +23,10 @@
         </activity>
         <activity
             android:name=".activities.RepositorySearchResultsActivity"
-            android:parentActivityName=".activities.MainActivity">
-        </activity>
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.UserSearchResultsActivity"
+            android:parentActivityName=".activities.MainActivity" />
     </application>
 
 </manifest>

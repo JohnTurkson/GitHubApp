@@ -73,29 +73,31 @@
             app:layout_constraintTop_toBottomOf="@+id/search_button"
             tools:text="Results" />
 
-        <TextView
-            android:id="@+id/repository_results"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/blank"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@+id/nav_view_bottom"
             app:layout_constraintEnd_toEndOf="@+id/repository_results_title"
             app:layout_constraintStart_toStartOf="@+id/repository_results_title"
-            app:layout_constraintTop_toBottomOf="@+id/repository_results_title"
-            tools:text="Example Repository Name" />
+            app:layout_constraintTop_toBottomOf="@+id/repository_results_title">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/github_repositories"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="@+id/repository_results"
-            app:layout_constraintStart_toStartOf="@+id/repository_results"
-            app:layout_constraintTop_toBottomOf="@+id/repository_results">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/github_repositories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view_bottom"
