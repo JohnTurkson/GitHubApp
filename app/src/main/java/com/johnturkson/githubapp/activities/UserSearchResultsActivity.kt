@@ -13,32 +13,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.johnturkson.githubapp.R
-import com.johnturkson.githubapp.adapters.GitHubRepositoryViewAdapter
-import com.johnturkson.githubapp.adapters.GitHubRepositoryViewHolder
+import com.johnturkson.githubapp.adapters.GitHubUserViewAdapter
+import com.johnturkson.githubapp.adapters.GitHubUserViewHolder
 import com.johnturkson.githubapp.api.GitHubApi
-import com.johnturkson.githubapp.api.GitHubRepository
+import com.johnturkson.githubapp.api.GitHubUser
 import com.johnturkson.githubapp.databinding.ActivityRepositorySearchResultsBinding
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.list
 import timber.log.Timber
 
 @UnstableDefault
-class RepositorySearchResultsActivity : AppCompatActivity() {
+class UserSearchResultsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRepositorySearchResultsBinding
     private lateinit var toolbar: Toolbar
     private lateinit var resultsTitle: TextView
     private lateinit var resultsView: RecyclerView
     private lateinit var resultsViewManager: RecyclerView.LayoutManager
-    private lateinit var resultsViewAdapter: RecyclerView.Adapter<GitHubRepositoryViewHolder>
+    private lateinit var resultsViewAdapter: RecyclerView.Adapter<GitHubUserViewHolder>
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var results: List<GitHubRepository>
+    private lateinit var results: List<GitHubUser>
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        val json = intent.getStringExtra(EXTRA_REPOSITORIES)
+        val json = intent.getStringExtra(EXTRA_USERS)
         require(json != null)
-        results = GitHubApi.encoder.parse(GitHubRepository.serializer().list, json)
+        results = GitHubApi.encoder.parse(GitHubUser.serializer().list, json)
         
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repository_search_results)
         toolbar = binding.searchResultsToolbar
@@ -47,7 +47,7 @@ class RepositorySearchResultsActivity : AppCompatActivity() {
         
         resultsView = binding.repositories
         resultsViewManager = LinearLayoutManager(this)
-        resultsViewAdapter = GitHubRepositoryViewAdapter(results)
+        resultsViewAdapter = GitHubUserViewAdapter(results)
         resultsView = binding.repositories.apply {
             layoutManager = resultsViewManager
             adapter = resultsViewAdapter
@@ -55,9 +55,7 @@ class RepositorySearchResultsActivity : AppCompatActivity() {
         
         bottomNavigationView = binding.navViewBottom
         bottomNavigationView.setOnNavigationItemSelectedListener {
-            onBottomNavigationViewItemSelected(
-                it
-            )
+            onBottomNavigationViewItemSelected(it)
         }
     }
     
@@ -104,6 +102,6 @@ class RepositorySearchResultsActivity : AppCompatActivity() {
     }
     
     companion object {
-        const val EXTRA_REPOSITORIES: String = "repositories"
+        const val EXTRA_USERS: String = "users"
     }
 }

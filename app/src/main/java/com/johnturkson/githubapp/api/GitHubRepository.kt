@@ -14,16 +14,6 @@ data class GitHubRepository(
     val description: String?
 )
 
-// TODO serialize Strings as URLs
-@Serializable
-data class GitHubUser(
-    val login: String,
-    val id: Int,
-    @SerialName("node_id") val nodeId: String,
-    @SerialName("avatar_url") val avatar: String,
-    @SerialName("html_url") val url: String
-)
-
 // TODO serialize Strings to [Zoned?]DateTime objects
 @Serializable
 data class RepositoryTimeMetadata(

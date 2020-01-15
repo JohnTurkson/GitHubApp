@@ -16,15 +16,15 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/AppTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/settings_menu"
             app:navigationIcon="@drawable/ic_menu"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:subtitle="Placeholder Subtitle"
-            app:title="Placeholder Title" />
+            app:popupTheme="@style/AppTheme"
+            app:subtitle="Main Subtitle"
+            app:title="Main Title" />
 
         <TextView
             android:id="@+id/user_search_bar_title"
@@ -73,29 +73,31 @@
             app:layout_constraintTop_toBottomOf="@+id/search_button"
             tools:text="Results" />
 
-        <TextView
-            android:id="@+id/repository_results"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:text="@string/blank"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@+id/nav_view_bottom"
             app:layout_constraintEnd_toEndOf="@+id/repository_results_title"
             app:layout_constraintStart_toStartOf="@+id/repository_results_title"
-            app:layout_constraintTop_toBottomOf="@+id/repository_results_title"
-            tools:text="Example Repository Name" />
+            app:layout_constraintTop_toBottomOf="@+id/repository_results_title">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/github_repositories"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="@+id/repository_results"
-            app:layout_constraintStart_toStartOf="@+id/repository_results"
-            app:layout_constraintTop_toBottomOf="@+id/repository_results">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        </androidx.recyclerview.widget.RecyclerView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/github_repositories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view_bottom"

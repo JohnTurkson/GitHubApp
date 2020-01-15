@@ -12,17 +12,17 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
+import timber.log.Timber
 
-@UnstableDefault // Needed due to custom Json configuration
-val encoder: StringFormat =
-    Json(JsonConfiguration(strictMode = false, encodeDefaults = false, prettyPrint = true))
-
+// TODO move into test class
 @UnstableDefault
 fun main() {
-    val user: String = "JohnTurkson"
-    val repository: String = "GitHubApp"
+    val username = "JohnTurkson"
+    val name = "John Turkson"
+    val repository = "GitHubApp"
     
-    val repositories: Call<List<GitHubRepository>> = GitHubApi.client.getRepositories(user)
+    val repositories = GitHubApi.client.getRepositories(username)
     // TODO extract callback components (onResponse, onFailure) to separate functions
     repositories.enqueue(object : Callback<List<GitHubRepository>> {
         override fun onResponse(
@@ -33,18 +33,18 @@ fun main() {
                 response.body()?.forEach { println(it) } ?: println("No repositories found")
             } else {
                 // TODO handle 4xx status codes
-                println("Unable to obtain repositories for $user")
+                println("Unable to obtain repositories for $username")
             }
         }
         
         override fun onFailure(call: Call<List<GitHubRepository>>, t: Throwable) {
-            println("failed")
+            Timber.d("failed when getting repositories for $username")
             t.printStackTrace()
             // TODO handle failure
         }
     })
     
-    val commits: Call<List<GitHubCommit>> = GitHubApi.client.getCommits(user, repository)
+    val commits: Call<List<GitHubCommit>> = GitHubApi.client.getCommits(username, repository)
     // TODO extract callback components (onResponse, onFailure) to separate functions
     commits.enqueue(object : Callback<List<GitHubCommit>> {
         override fun onResponse(
@@ -55,20 +55,46 @@ fun main() {
                 response.body()?.forEach { println(it) } ?: println("No repositories found")
             } else {
                 // TODO handle 4xx status codes
-                println("Unable to obtain repositories for $user")
+                println("Unable to obtain repositories for $username")
             }
         }
         
         override fun onFailure(call: Call<List<GitHubCommit>>, t: Throwable) {
-            println("failed")
+            Timber.d("failed when getting repositories for $username")
             t.printStackTrace()
             // TODO handle failure
+        }
+    })
+    
+    val searchUsers: Call<GitHubUserSearchResponse> = GitHubApi.client.searchUsers(name)
+    searchUsers.enqueue(object : Callback<GitHubUserSearchResponse> {
+        override fun onResponse(
+            call: Call<GitHubUserSearchResponse>,
+            response: Response<GitHubUserSearchResponse>
+        ) {
+            if (response.isSuccessful) {
+                val users = response.body()?.users ?: emptyList()
+                users.forEach { println(it) }
+            } else {
+                // TODO handle 4xx status codes
+                println("Unable to find user with name $name")
+            }
+        }
+        
+        override fun onFailure(call: Call<GitHubUserSearchResponse>, t: Throwable) {
+            Timber.d("failed when searching for user $name")
+            t.printStackTrace()
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
     })
 }
 
 @UnstableDefault
 object GitHubApi {
+    @UnstableDefault // Needed due to custom Json configuration
+    val encoder: StringFormat =
+        Json(JsonConfiguration(strictMode = false, encodeDefaults = false, prettyPrint = true))
+    
     private const val endpoint: String = "https://api.github.com/"
     private val mediaType: MediaType = MediaType.get("application/json")
     private val retrofit: Retrofit = Retrofit.Builder()
@@ -87,4 +113,7 @@ interface GitHubApiService {
         @Path("owner") owner: String,
         @Path("repo") repository: String
     ): Call<List<GitHubCommit>>
+    
+    @GET("search/users")
+    fun searchUsers(@Query("q") name: String): Call<GitHubUserSearchResponse>
 }
