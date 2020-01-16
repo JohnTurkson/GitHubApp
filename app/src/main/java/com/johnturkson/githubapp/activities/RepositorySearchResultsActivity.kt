@@ -55,9 +55,7 @@ class RepositorySearchResultsActivity : AppCompatActivity() {
         
         bottomNavigationView = binding.navViewBottom
         bottomNavigationView.setOnNavigationItemSelectedListener {
-            onBottomNavigationViewItemSelected(
-                it
-            )
+            onBottomNavigationViewItemSelected(it)
         }
     }
     
@@ -86,10 +84,18 @@ class RepositorySearchResultsActivity : AppCompatActivity() {
         // TODO implement bottom navigation
         Timber.d("bottom navigation view item selected")
         return when (item.itemId) {
-            R.id.navigation_search -> Toast.makeText(this, "search", Toast.LENGTH_SHORT).show()
+            R.id.navigation_search -> Toast.makeText(
+                this,
+                "search",
+                Toast.LENGTH_SHORT
+            ).show()
                 .also { Timber.d("search tab selected") }
                 .let { true }
-            R.id.navigation_users -> Toast.makeText(this, "users", Toast.LENGTH_SHORT).show()
+            R.id.navigation_users -> Toast.makeText(
+                this,
+                "users",
+                Toast.LENGTH_SHORT
+            ).show()
                 .also { Timber.d("user tab selected") }
                 .let { true }
             R.id.navigation_repositories -> Toast.makeText(

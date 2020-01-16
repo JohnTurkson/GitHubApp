@@ -14,9 +14,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.library.BuildConfig
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.johnturkson.githubapp.R
 import com.johnturkson.githubapp.adapters.GitHubRepositoryViewAdapter
 import com.johnturkson.githubapp.adapters.GitHubRepositoryViewHolder
@@ -38,6 +40,7 @@ import kotlin.coroutines.CoroutineContext
 class MainActivity : AppCompatActivity(), CoroutineScope {
     
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mainDrawerLayout: DrawerLayout
     private lateinit var mainActivityLayout: ConstraintLayout
     private lateinit var toolbar: Toolbar
     private lateinit var searchBar: EditText
@@ -47,6 +50,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private lateinit var repositoriesViewManager: RecyclerView.LayoutManager
     private lateinit var repositoriesViewAdapter: RecyclerView.Adapter<GitHubRepositoryViewHolder>
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var navigationDrawer: NavigationView
     
     private val repositories = mutableListOf<GitHubRepository>()
     
@@ -57,6 +61,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         
+        mainDrawerLayout = binding.mainActivityDrawerLayout
         mainActivityLayout = binding.mainActivityLayout
         
         toolbar = binding.mainToolbar
@@ -82,6 +87,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         bottomNavigationView.setOnNavigationItemSelectedListener {
             onBottomNavigationViewItemSelected(it)
         }
+        
+        navigationDrawer = binding.navigationDrawer
     }
     
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -104,8 +111,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     
     private fun onToolbarNavigationClicked(view: View) {
         Timber.d("toolbar navigation menu button clicked")
-        // TODO open navigation drawer
         Toast.makeText(this, "navigation selected", Toast.LENGTH_SHORT).show()
+        openNavigationDrawer()
+    }
+    
+    private fun openNavigationDrawer() {
+        mainDrawerLayout.openDrawer(navigationDrawer)
     }
     
     // TODO refactor into object to reduce duplication (pass in context)
@@ -150,6 +161,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     
     // TODO refactor into separate object/class
     private fun searchForUsers(name: String) {
+        if (name.isEmpty()) return
         launch {
             Timber.d("request to find user with name $name")
             val response = withContext(Dispatchers.IO) {
@@ -206,6 +218,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
     }
     
+    // TODO decouple from MainActivity
     private fun updateRepositoriesView(repositories: List<GitHubRepository>) {
         val displayRepositoriesIntent = Intent(this, RepositorySearchResultsActivity::class.java)
         val json = GitHubApi.encoder.stringify(GitHubRepository.serializer().list, repositories)

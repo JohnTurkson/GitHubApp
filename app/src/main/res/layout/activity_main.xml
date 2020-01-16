@@ -4,125 +4,140 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_activity_layout"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/main_activity_drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.MainActivity">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_activity_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/AppTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/settings_menu"
-            app:navigationIcon="@drawable/ic_menu"
-            app:popupTheme="@style/AppTheme"
-            app:subtitle="Main Subtitle"
-            app:title="Main Title" />
+            tools:context=".activities.MainActivity">
 
-        <TextView
-            android:id="@+id/user_search_bar_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/user_search_bar_title_hint"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right_margin"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left_margin"
-            app:layout_constraintTop_toBottomOf="@+id/main_toolbar" />
-
-        <EditText
-            android:id="@+id/user_search_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/user_search_bar_hint"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/user_search_bar_title"
-            app:layout_constraintStart_toStartOf="@+id/user_search_bar_title"
-            app:layout_constraintTop_toBottomOf="@+id/user_search_bar_title" />
-
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbarSize="4dp"
-            android:text="@string/user_search_button_text"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/user_search_bar"
-            app:layout_constraintTop_toBottomOf="@+id/user_search_bar" />
-
-        <TextView
-            android:id="@+id/repository_results_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_layout_margin"
-            android:text="@string/blank"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_right_margin"
-            app:layout_constraintStart_toStartOf="@+id/guideline_left_margin"
-            app:layout_constraintTop_toBottomOf="@+id/search_button"
-            tools:text="Results" />
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@+id/nav_view_bottom"
-            app:layout_constraintEnd_toEndOf="@+id/repository_results_title"
-            app:layout_constraintStart_toStartOf="@+id/repository_results_title"
-            app:layout_constraintTop_toBottomOf="@+id/repository_results_title">
-
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/AppTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:menu="@menu/settings_menu"
+                app:navigationIcon="@drawable/ic_menu"
+                app:popupTheme="@style/AppTheme"
+                app:subtitle="Main Subtitle"
+                app:title="Main Title" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/github_repositories"
+            <TextView
+                android:id="@+id/user_search_bar_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/user_search_bar_title"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_margin"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_margin"
+                app:layout_constraintTop_toBottomOf="@+id/main_toolbar" />
+
+            <EditText
+                android:id="@+id/user_search_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="@string/user_search_bar_hint"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/user_search_bar_title"
+                app:layout_constraintStart_toStartOf="@+id/user_search_bar_title"
+                app:layout_constraintTop_toBottomOf="@+id/user_search_bar_title" />
+
+            <Button
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbarSize="4dp"
+                android:text="@string/user_search_button_text"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/user_search_bar"
+                app:layout_constraintTop_toBottomOf="@+id/user_search_bar" />
+
+            <TextView
+                android:id="@+id/repository_results_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_layout_margin"
+                android:text="@string/blank"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right_margin"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left_margin"
+                app:layout_constraintTop_toBottomOf="@+id/search_button"
+                tools:text="Results" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:fillViewport="true"
+                app:layout_constraintBottom_toTopOf="@+id/nav_view_bottom"
+                app:layout_constraintEnd_toEndOf="@+id/repository_results_title"
+                app:layout_constraintStart_toStartOf="@+id/repository_results_title"
+                app:layout_constraintTop_toBottomOf="@+id/repository_results_title">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+                    android:orientation="vertical">
 
-                </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/github_repositories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view_bottom"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+                    </androidx.recyclerview.widget.RecyclerView>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_view_bottom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/windowBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/bottom_navigation_menu" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
             app:menu="@menu/bottom_navigation_menu" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_left_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="16dp"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_right_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="16dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

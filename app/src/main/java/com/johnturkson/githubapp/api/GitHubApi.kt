@@ -105,6 +105,9 @@ object GitHubApi {
 }
 
 interface GitHubApiService {
+    @GET("users/{user}")
+    fun getUser(@Path("user") user: String): Call<GitHubUser>
+    
     @GET("users/{user}/repos")
     fun getRepositories(@Path("user") user: String): Call<List<GitHubRepository>>
     
