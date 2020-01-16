@@ -28,6 +28,7 @@ class GitHubRepositoryViewAdapter(private val repositories: List<GitHubRepositor
             ?: holder.view.resources.getString(R.string.missing_description)
         holder.view.setOnClickListener {
             // TODO display repository commits
+            // TODO figure out proper way to handle clicks in recyclerview
             
             // TODO remove
             Timber.d("clicked position $position - ${repository.name}")
