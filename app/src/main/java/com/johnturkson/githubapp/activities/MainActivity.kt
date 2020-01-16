@@ -162,7 +162,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     // TODO refactor into separate object/class
     private fun searchForUsers(name: String) {
         if (name.isEmpty()) return
-        
         launch {
             Timber.d("request to find user with name $name")
             val response = withContext(Dispatchers.IO) {
