@@ -21,8 +21,8 @@
             app:menu="@menu/settings_menu"
             app:navigationIcon="?homeAsUpIndicator"
             app:popupTheme="@style/AppTheme"
-            app:subtitle="Search Results Subtitle"
-            app:title="Search Results Title" />
+            app:subtitle="@string/title_repositories"
+            app:title="@string/title_search_results" />
 
         <TextView
             android:id="@+id/resultsTitle"
